@@ -66,13 +66,15 @@ async def startmenu(_, query: CallbackQuery):
 #----------------menu backcallbac----------------#
 @bot.on_callback_query(filters.regex("BACK_MENU"))
 async def startmenu(_, query: CallbackQuery):
-    await query.edit_message_text(START_MESSAGE,reply_markup=START_MESSAGE_BUTTONS,
+    await query.edit_message_text(START_MESSAGE, 
+     reply_markup=START_MESSAGE_BUTTONS,
      disable_web_page_preview=True
     )
 #-------------Bot List Callback---------------------#
 @bot.on_callback_query(filters.regex("BOT_CALLBACK"))
 async def startmenu(_, query: CallbackQuery):
-    await query.edit_message_text(BOT_LIST_MG,reply_markup=REPLY_BUTTONS,
+    await query.edit_message_text(BOT_LIST_MG, 
+     reply_markup=REPLY_BUTTONS,
      disable_web_page_preview=True
     )
 #-------------BOT LIST CALLBACK--------------#
