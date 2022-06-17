@@ -12,6 +12,7 @@ bot=Client(
     api_hash = os.environ["API_HASH"],
     bot_token = os.environ["BOT_TOKEN"]
 )
+
 #---------Start Buttons & Message------------#
 START_MESSAGE = "Im Night Vission Official State Bot! @Night Vission"
 START_MESSAGE_BUTTONS = [
@@ -61,16 +62,16 @@ def callback_query(Client, CallbackQuery):
 	if CallbackQuery.data == "HELP_CALLBACK":
 		CallbackQuery.edit_message_text(
 		HELP_MESSAGE,
-		reply_markup = HELP_BUTTONS
-		)
-
+		reply_markup = InlineKeyboardMarkup(HELP_BUTTONS)
+)
+#--------------abck--_----------#
 @bot.on_callback_query()
 def callback_query(Client, CallbackQuery):
 	if CallbackQuery.data == "BACK_MENU":
 		CallbackQuery.edit_message_text(
-		START_MESSAGE,            
-                reply_markup=START_MESSAGE_BUTTONS
-		)
+		START_MESSAGE,            reply_markup=InlineKeyboardButton(START_MESSAGE_BUTTONS)
+)
+
 #-------------BOT LIST CALLBACK--------------#
 BOT_LIST_MG = "Chek Bellow All Night Vission Bots Catogories"
 REPLY_BUTTONS = ReplyKeyboardMarkup(
@@ -84,6 +85,10 @@ REPLY_BUTTONS = ReplyKeyboardMarkup(
         resize_keyboard=True,
         one_time_keyboard=True
     )
+    
+#Buttons Replys
+SFT = "This Is Vc bots"
+
 @bot.on_message(filters.command('listbots'))
 def listbots(bot, message):
 	text = BOT_LIST_MG
@@ -94,7 +99,12 @@ def listbots(bot, message):
 )
 @bot.on_message(filters.regex("🎧Voice Chat"))
 def reply_to_VoiceChat(bot, message):
-	bot.send_message(message.chat.id, "hi")
+	text = SFT,
+	sticker = CAACAgUAAxkBAAEFEStirHHlw6vO7FAVQjJHShnW8dnzKQACswUAAkHDSVVLKAOBEIa-HCQE
+	message.reply(
+	text=text,
+	sticker=sticker
+)
 	
 #kick a user ©Night Vission ™ 2022 All rights Resived ✓
 @bot.on_message(filters.command('kick') & filters.group)
