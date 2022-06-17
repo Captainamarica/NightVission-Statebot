@@ -12,6 +12,7 @@ bot=Client(
     api_hash = os.environ["API_HASH"],
     bot_token = os.environ["BOT_TOKEN"]
 )
+
 #---------Start Buttons & Message------------#
 START_MESSAGE = "Im Night Vission Official State Bot! @Night Vission"
 START_MESSAGE_BUTTONS = [
@@ -62,28 +63,18 @@ async def startmenu(_, query: CallbackQuery):
         reply_markup=HELP_BUTTONS,
      disable_web_page_preview=True
     )
-#-------------------back callback--------------------#
-Back_message = "Im Night Vission Official State Bot! @Night Vission"
-Back_buttons = [
-            [
-                InlineKeyboardButton('HELP', callback_data="HELP_CALLBACK")
-            ],
-            [
-                InlineKeyboardButton(' SUPPORT', url='https://t.me/NightVissionSupport'),
-                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/NightVission'),
-                InlineKeyboardButton(' CREATOR', url='https://t.me/NA_VA_N_JA_NA1')
-            ],
-            [
-                InlineKeyboardButton('NIGHT VISSION BOT LIST', callback_data="BOT_CALLBACK")
-            ]
-        ]
+#----------------menu backcallbac----------------#
 @bot.on_callback_query(filters.regex("BACK_MENU"))
 async def startmenu(_, query: CallbackQuery):
-    await query.edit_message_text(Back_message,
-        reply_markup=Back_buttons,
+    await query.edit_message_text(START_MESSAGE,reply_markup=START_MESSAGE_BUTTONS,
      disable_web_page_preview=True
     )
-
+#-------------Bot List Callback---------------------#
+@bot.on_callback_query(filters.regex("BOT_CALLBACK"))
+async def startmenu(_, query: CallbackQuery):
+    await query.edit_message_text(BOT_LIST_MG,reply_markup=REPLY_BUTTONS,
+     disable_web_page_preview=True
+    )
 #-------------BOT LIST CALLBACK--------------#
 BOT_LIST_MG = "Chek Bellow All Night Vission Bots Catogories"
 REPLY_BUTTONS = ReplyKeyboardMarkup(
