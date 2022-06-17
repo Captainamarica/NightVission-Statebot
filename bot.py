@@ -12,7 +12,6 @@ bot=Client(
     api_hash = os.environ["API_HASH"],
     bot_token = os.environ["BOT_TOKEN"]
 )
-
 #---------Start Buttons & Message------------#
 START_MESSAGE = "Im Night Vission Official State Bot! @Night Vission"
 START_MESSAGE_BUTTONS = [
@@ -62,32 +61,33 @@ def callback_query(Client, CallbackQuery):
 	if CallbackQuery.data == "HELP_CALLBACK":
 		CallbackQuery.edit_message_text(
 		HELP_MESSAGE,
-		reply_markup = InlineKeyboardMarkup(HELP_BUTTONS)
+		reply_markup = HELP_BUTTONS
 		)
 
 @bot.on_callback_query()
 def callback_query(Client, CallbackQuery):
 	if CallbackQuery.data == "BACK_MENU":
 		CallbackQuery.edit_message_text(
-		START_MESSAGE,
-		reply_markup = InlineKeyboardMarkup(START_MESSAGE_BUTTONS)
+		START_MESSAGE,            
+                reply_markup=START_MESSAGE_BUTTONS
 		)
 #-------------BOT LIST CALLBACK--------------#
 BOT_LIST_MG = "Chek Bellow All Night Vission Bots Catogories"
-REPLY_BUTTONS = [
-[
-  ("🎧Voice Chat"),
-  ("Social"),
-  ("Group Manager")
-  ],
-  [
-  ("Tools & Helps")
- ]
-]
+REPLY_BUTTONS = ReplyKeyboardMarkup(
+      [
+            ["🎧Voice Chat"],
+            ["Social"],
+            ["Group Manager"],
+            ["Tools & Helps"]
+           
+        ],
+        resize_keyboard=True,
+        one_time_keyboard=True
+    )
 @bot.on_message(filters.command('listbots'))
 def listbots(bot, message):
 	text = BOT_LIST_MG
-	reply_markup = ReplyKeyboardMarkup(REPLY_BUTTONS, one_time_keyboard=True, resizekeyboard=True)
+	reply_markup = REPLY_BUTTONS
 	message.reply(
 	text=text,
 	reply_markup=reply_markup
@@ -114,6 +114,7 @@ def unban(bot, message):
             bot.unban_chat_member(message.chat.id, message.reply_to_message.from_user.id)
             bot.send_message(message.chat.id, f"{message.reply_to_message.from_user.mention} Unbanned! Come here!"
 )
+
 #mute user ! ©Night Vission™ 2022 All Rights Resived✓
 @bot.on_message(filters.command('mute') & filters.group)
 def mute(bot, message):
@@ -121,6 +122,7 @@ def mute(bot, message):
             bot.send_message(message.chat.id, f"{message.reply_to_message.from_user.mention} Muted !"
 )
 #unmute user! ©Night Vission™ 2022 All Rights Resived✓
+
 @bot.on_message(filters.command('unmute') & filters.group)
 def unmute(bot, message):
             bot.unrestrict_chat_member(message.chat.id, message.reply_to_message.from_user.id)
