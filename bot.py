@@ -12,7 +12,6 @@ bot=Client(
     api_hash = os.environ["API_HASH"],
     bot_token = os.environ["BOT_TOKEN"]
 )
-
 #---------Start Buttons & Message------------#
 START_MESSAGE = "Im Night Vission Official State Bot! @Night Vission"
 START_MESSAGE_BUTTONS = [
@@ -57,20 +56,33 @@ HELP_BUTTONS = [
 [InlineKeyboardButton('BACK', callback_data="BACK_MENU")]
 ]
 
-@bot.on_callback_query()
-def callback_query(Client, CallbackQuery):
-	if CallbackQuery.data == "HELP_CALLBACK":
-		CallbackQuery.edit_message_text(
-		HELP_MESSAGE,
-		reply_markup = InlineKeyboardMarkup(HELP_BUTTONS)
-)
-#--------------abck--_----------#
-@bot.on_callback_query()
-def callback_query(Client, CallbackQuery):
-	if CallbackQuery.data == "BACK_MENU":
-		CallbackQuery.edit_message_text(
-		START_MESSAGE,            reply_markup=InlineKeyboardButton(START_MESSAGE_BUTTONS)
-)
+@bot.on_callback_query(filters.regex("HELP_CALLBACK"))
+async def startmenu(_, query: CallbackQuery):
+    await query.edit_message_text(HELP_MESSAGE,
+        reply_markup=HELP_BUTTONS,
+     disable_web_page_preview=True
+    )
+#-------------------back callback--------------------#
+Back_message = "Im Night Vission Official State Bot! @Night Vission"
+Back_buttons = [
+            [
+                InlineKeyboardButton('HELP', callback_data="HELP_CALLBACK")
+            ],
+            [
+                InlineKeyboardButton(' SUPPORT', url='https://t.me/NightVissionSupport'),
+                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/NightVission'),
+                InlineKeyboardButton(' CREATOR', url='https://t.me/NA_VA_N_JA_NA1')
+            ],
+            [
+                InlineKeyboardButton('NIGHT VISSION BOT LIST', callback_data="BOT_CALLBACK")
+            ]
+        ]
+@bot.on_callback_query(filters.regex("BACK_MENU"))
+async def startmenu(_, query: CallbackQuery):
+    await query.edit_message_text(Back_message,
+        reply_markup=Back_buttons,
+     disable_web_page_preview=True
+    )
 
 #-------------BOT LIST CALLBACK--------------#
 BOT_LIST_MG = "Chek Bellow All Night Vission Bots Catogories"
@@ -100,11 +112,9 @@ def listbots(bot, message):
 @bot.on_message(filters.regex("🎧Voice Chat"))
 def reply_to_VoiceChat(bot, message):
 	text = SFT,
-	sticker = CAACAgUAAxkBAAEFEStirHHlw6vO7FAVQjJHShnW8dnzKQACswUAAkHDSVVLKAOBEIa-HCQE
 	message.reply(
-	text=text,
-	sticker=sticker
-)
+	text=text
+) 
 	
 #kick a user ©Night Vission ™ 2022 All rights Resived ✓
 @bot.on_message(filters.command('kick') & filters.group)
