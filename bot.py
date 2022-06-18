@@ -58,7 +58,7 @@ HELP_BUTTONS = [
 ]
 
 @bot.on_callback_query(filters.regex("HELP_CALLBACK"))
-async def startmenu(_, query: CallbackQuery):
+async def helpmenu(_, query: CallbackQuery):
     await query.edit_message_text(
      text = HELP_MESSAGE,
      reply_markup = HELP_BUTTONS,
@@ -74,7 +74,7 @@ async def startmenu(_, query: CallbackQuery):
     )
 #-------------Bot List Callback---------------------#
 @bot.on_callback_query(filters.regex("BOT_CALLBACK"))
-async def startmenu(_, query: CallbackQuery):
+async def botlist(_, query: CallbackQuery):
     await query.edit_message_text(
      text = BOT_LIST_MG,
      reply_markup = REPLY_BUTTONS,
