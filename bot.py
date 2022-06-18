@@ -14,8 +14,8 @@ bot=Client(
 )
 
 #---------Start Buttons & Message------------#
-START_MESSAGE = "Im Night Vission Official State Bot! @Night Vission"
-START_MESSAGE_BUTTONS = [
+START_MG = "Im Night Vission Official State Bot! @NightVission"
+START_BTN = [
             [
                 InlineKeyboardButton('HELP', callback_data="HELP_CALLBACK")
             ],
@@ -32,8 +32,8 @@ START_MESSAGE_BUTTONS = [
 #--------------------Start Bot---------------------------#
 @bot.on_message(filters.command('start') & filters.private)
 async def start(client, message):
-    text = START_MESSAGE
-    reply_markup = InlineKeyboardMarkup(START_MESSAGE_BUTTONS)
+    text = START_MG
+    reply_markup = InlineKeyboardMarkup(START_BTN)
     await message.reply(
         text=text,
         reply_markup=reply_markup,
@@ -59,22 +59,25 @@ HELP_BUTTONS = [
 
 @bot.on_callback_query(filters.regex("HELP_CALLBACK"))
 async def startmenu(_, query: CallbackQuery):
-    await query.edit_message_text(HELP_MESSAGE,
-        reply_markup=HELP_BUTTONS,
+    await query.edit_message_text(
+     text = HELP_MESSAGE,
+     reply_markup = HELP_BUTTONS,
      disable_web_page_preview=True
     )
 #----------------menu backcallbac----------------#
 @bot.on_callback_query(filters.regex("BACK_MENU"))
 async def startmenu(_, query: CallbackQuery):
-    await query.edit_message_text(START_MESSAGE, 
-     reply_markup=START_MESSAGE_BUTTONS,
+    await query.edit_message_text(
+     text = START_MG,
+     reply_markup = START_BTN,
      disable_web_page_preview=True
     )
 #-------------Bot List Callback---------------------#
 @bot.on_callback_query(filters.regex("BOT_CALLBACK"))
 async def startmenu(_, query: CallbackQuery):
-    await query.edit_message_text(BOT_LIST_MG, 
-     reply_markup=REPLY_BUTTONS,
+    await query.edit_message_text(
+     text = BOT_LIST_MG,
+     reply_markup = REPLY_BUTTONS,
      disable_web_page_preview=True
     )
 #-------------BOT LIST CALLBACK--------------#
